@@ -1,0 +1,1780 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="theme-color" content="#2445f5">
+        <title>Emanuele De Rosa — IT in motion</title>
+        <meta name="description" content="Application IT Analyst and developer based in Naples. Airport operations, reliable systems and useful automation.">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap'); :root {
+                --blue: #2445f5;
+                --lime: #e2ff54;
+                --ink: #1b1e19;
+                --paper: #f2f3e9;
+                --muted: #b7bdad;
+                --accent: var(--lime);
+                font-family: 'DM Sans',Arial,sans-serif;
+                color: var(--ink);
+                background: var(--ink);
+                font-synthesis: none
+            }
+
+            * {
+                box-sizing: border-box
+            }
+
+            body {
+                margin: 0
+            }
+
+            html {
+                scroll-behavior: smooth;
+                scroll-padding-top: 100px
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none
+            }
+
+            button {
+                font: inherit;
+                cursor: pointer
+            }
+
+            button,a {
+                -webkit-tap-highlight-color: transparent
+            }
+
+            button:focus-visible,a:focus-visible,summary:focus-visible {
+                outline: 3px solid currentColor;
+                outline-offset: 6px
+            }
+
+            ::selection {
+                background: var(--lime);
+                color: var(--blue)
+            }
+
+            p {
+                line-height: 1.65;
+                font-size: 1rem
+            }
+
+            header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 20;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 23px 4%;
+                color: var(--lime);
+                border-bottom: 1px solid #e2ff5450
+            }
+
+            .brand {
+                font-size: 3rem;
+                font-weight: 700;
+                letter-spacing: -.09em;
+                line-height: 1
+            }
+
+            .brand span {
+                font-size: 1rem;
+                vertical-align: top;
+                letter-spacing: 0;
+                margin-left: 5px
+            }
+
+            nav {
+                display: flex;
+                gap: 30px;
+                font-size: .9rem
+            }
+
+            nav a {
+                position: relative;
+                padding: 8px 0
+            }
+
+            nav a:after {
+                content: '';
+                height: 1px;
+                background: currentColor;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform .3s
+            }
+
+            nav a:hover:after {
+                transform: scaleX(1)
+            }
+
+            .nav-end {
+                display: flex;
+                gap: 20px;
+                align-items: center
+            }
+
+            .contact-link {
+                border: 1px solid #e2ff5480;
+                border-radius: 99px;
+                padding: 12px 22px;
+                font-size: .9rem
+            }
+
+            .contact-link span {
+                margin-left: 25px
+            }
+
+            #menu {
+                display: none
+            }
+
+            .skip {
+                position: fixed;
+                top: -100px;
+                left: 20px;
+                z-index: 99;
+                padding: 15px;
+                background: var(--lime)
+            }
+
+            .skip:focus {
+                top: 10px
+            }
+
+            .progress {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 4px;
+                z-index: 100;
+                width: 0;
+                background: var(--lime)
+            }
+
+            section {
+                padding: 110px 6%;
+                position: relative;
+                overflow: hidden
+            }
+
+            #hero {
+                padding: 133px 4% 25px;
+                background: var(--blue);
+                color: var(--lime);
+                min-height: 100svh;
+                display: flex;
+                flex-direction: column
+            }
+
+            .hero-top,.hero-foot {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                font-size: .75rem;
+                letter-spacing: .1em
+            }
+
+            .hero-top {
+                margin-bottom: 25px
+            }
+
+            h1 {
+                font-family: 'Barlow Condensed','Arial Narrow',Impact,sans-serif;
+                font-size: clamp(5rem,17.7vw,20rem);
+                font-weight: 800;
+                letter-spacing: -.035em;
+                line-height: .78;
+                margin: 0 0 35px
+            }
+
+            h1>span {
+                display: block;
+                animation: arrive 1s cubic-bezier(.16,1,.3,1) both
+            }
+
+            h1 .surname {
+                margin-top: 14px;
+                animation-delay: .13s;
+                display: flex;
+                justify-content: space-between;
+                align-items: center
+            }
+
+            .name-star {
+                font-family: Arial,sans-serif;
+                font-weight: 400;
+                font-size: .78em;
+                line-height: .8;
+                animation: rotate 32s linear infinite;
+                display: inline-block;
+                margin-right: 3%
+            }
+
+            .hero-bottom {
+                display: grid;
+                grid-template-columns: 1fr 1fr 90px;
+                gap: 7%;
+                align-items: end;
+                margin-top: auto
+            }
+
+            .small-label {
+                font-size: .75rem;
+                letter-spacing: .12em
+            }
+
+            .hero-note p {
+                font-size: clamp(1.1rem,1.7vw,1.6rem);
+                line-height: 1.25;
+                font-weight: 500;
+                margin: 12px 0
+            }
+
+            .hero-copy>p {
+                margin: 0 0 23px;
+                max-width: 490px;
+                font-size: 1rem
+            }
+
+            .hero-actions {
+                display: flex;
+                align-items: center;
+                gap: 25px;
+                flex-wrap: wrap
+            }
+
+            .pill {
+                display: inline-flex;
+                gap: 35px;
+                align-items: center;
+                justify-content: space-between;
+                border: 1px solid transparent;
+                border-radius: 99px;
+                padding: 16px 24px;
+                background: var(--lime);
+                color: var(--ink);
+                font-size: .9rem;
+                transition: transform .3s,background .3s
+            }
+
+            .pill:hover {
+                transform: translateY(-4px);
+                background: white
+            }
+
+            .cv {
+                font-size: .875rem;
+                border-bottom: 1px solid currentColor;
+                padding-bottom: 5px
+            }
+
+            .scroll-round {
+                width: 75px;
+                height: 75px;
+                border: 1px solid #e2ff5480;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                font-size: 2.5rem;
+                transition: background .3s,color .3s
+            }
+
+            .scroll-round:hover {
+                background: var(--lime);
+                color: var(--blue)
+            }
+
+            .hero-foot {
+                border-top: 1px solid #e2ff5440;
+                margin-top: 35px;
+                padding-top: 18px;
+                font-size: .7rem
+            }
+
+            .ticker {
+                overflow: hidden;
+                padding: 23px 0;
+                background: var(--lime);
+                font-size: 1.5rem;
+                color: var(--ink)
+            }
+
+            .ticker>div {
+                display: flex;
+                gap: 35px;
+                width: max-content;
+                white-space: nowrap;
+                animation: marquee 38s linear infinite
+            }
+
+            .ticker span {
+                font-size: .85rem;
+                letter-spacing: .12em;
+                align-self: center
+            }
+
+            .sec-tag {
+                display: block;
+                font-size: .8rem;
+                letter-spacing: .12em;
+                text-transform: uppercase;
+                margin-bottom: 28px
+            }
+
+            .sec-tag:before {
+                content: '↗';
+                margin-right: 12px
+            }
+
+            .sec-title {
+                font-family: 'Barlow Condensed',Impact,sans-serif;
+                font-size: clamp(3.8rem,7.8vw,8.5rem);
+                line-height: .93;
+                letter-spacing: -.035em;
+                font-weight: 700;
+                margin: 0 0 40px
+            }
+
+            .accent {
+                color: var(--accent)
+            }
+
+            #about {
+                background: var(--ink);
+                color: var(--paper);
+                padding-bottom: 130px
+            }
+
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1.3fr 1fr;
+                gap: 12%
+            }
+
+            .about-body p {
+                max-width: 650px;
+                color: #c3c8bc
+            }
+
+            .about-body p strong,.hl {
+                color: inherit;
+                font-weight: 600
+            }
+
+            .stat-panel {
+                display: flex;
+                flex-direction: column;
+                justify-content: center
+            }
+
+            .stat {
+                padding: 25px 0;
+                border-bottom: 1px solid #ffffff30
+            }
+
+            .stat .num {
+                font-family: 'Barlow Condensed',Impact,sans-serif;
+                font-size: clamp(5.5rem,9vw,10rem);
+                line-height: 1;
+                color: var(--lime);
+                font-weight: 600;
+                letter-spacing: -.04em
+            }
+
+            .stat .lab {
+                font-size: .875rem;
+                color: #bec4b7;
+                margin: 10px 0
+            }
+
+            .chips {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-top: 28px
+            }
+
+            .chip,.cap-tags span,.ptags span {
+                font-size: .75rem;
+                border: 1px solid #8888;
+                border-radius: 99px;
+                padding: 8px 12px;
+                display: inline-block
+            }
+
+            .chips .chip:first-child {
+                display: none
+            }
+
+            #projects {
+                background: var(--paper);
+                --accent: var(--blue);
+                border-radius: 44px 44px 0 0
+            }
+
+            .proj-grid {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 22px;
+                counter-reset: project
+            }
+
+            .proj {
+                padding: 35px;
+                background: #e2e5d9;
+                min-height: 355px;
+                display: flex;
+                flex-direction: column;
+                transition: transform .45s,box-shadow .45s;
+                position: relative
+            }
+
+            .proj:first-child {
+                background: var(--blue);
+                color: var(--paper)
+            }
+
+            .proj:nth-child(2) {
+                background: var(--lime)
+            }
+
+            .proj:nth-child(3) {
+                background: #d8dced
+            }
+
+            .proj:hover {
+                transform: translateY(-7px);
+                box-shadow: 0 20px 30px #0001
+            }
+
+            .idx {
+                font-size: .8rem;
+                letter-spacing: .08em;
+                padding-bottom: 25px;
+                border-bottom: 1px solid #8886
+            }
+
+            .ptitle {
+                font-size: clamp(1.6rem,2.5vw,2.5rem);
+                font-weight: 500;
+                line-height: 1.1;
+                letter-spacing: -.04em;
+                margin: 26px 0 12px;
+                max-width: 450px
+            }
+
+            .pdesc {
+                max-width: 490px;
+                color: inherit;
+                opacity: .85;
+                margin-top: 0
+            }
+
+            .ptags {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                margin-top: auto;
+                padding-top: 10px
+            }
+
+            .cert-grid {
+                display: grid;
+                grid-template-columns: repeat(4,1fr);
+                gap: 24px
+            }
+
+            .cert {
+                padding: 24px 0;
+                border-top: 1px solid #8887
+            }
+
+            .cbadge {
+                font-size: .75rem;
+                line-height: 1.5
+            }
+
+            .cert h5 {
+                font-size: 1.2rem;
+                font-weight: 500;
+                margin: 20px 0 8px
+            }
+
+            .cert p {
+                font-size: .875rem;
+                opacity: .7
+            }
+
+            .sys-intro {
+                max-width: 640px;
+                margin-bottom: 50px
+            }
+
+            #skills {
+                background: var(--lime);
+                --accent: var(--blue)
+            }
+
+            .cap-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0 50px
+            }
+
+            .cap {
+                border-top: 1px solid #1b1e1940;
+                padding: 28px 0;
+                transition: padding .3s
+            }
+
+            .cap:hover {
+                padding-left: 10px
+            }
+
+            .cap-h {
+                display: flex;
+                gap: 14px;
+                align-items: center
+            }
+
+            .cap-ico svg {
+                width: 28px;
+                height: 28px;
+                display: block
+            }
+
+            .cap-t {
+                font-size: 1.4rem;
+                letter-spacing: -.03em
+            }
+
+            .cap p {
+                max-width: 580px
+            }
+
+            .cap-tags {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap
+            }
+
+            .cap-tags span {
+                border-color: #1b1e1940
+            }
+
+            #experience {
+                background: var(--ink);
+                color: var(--paper)
+            }
+
+            .timeline {
+                border-top: 1px solid #ffffff40
+            }
+
+            .tl-item {
+                border-bottom: 1px solid #ffffff40;
+                padding: 38px 0
+            }
+
+            .tl-head {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                align-items: baseline
+            }
+
+            .tl-role {
+                font-size: clamp(1.5rem,2.7vw,2.8rem);
+                letter-spacing: -.04em
+            }
+
+            .tl-date {
+                font-size: .8rem;
+                color: var(--lime)
+            }
+
+            .tl-org {
+                margin-top: 12px;
+                color: var(--lime);
+                font-size: .875rem
+            }
+
+            .tl-desc {
+                max-width: 840px;
+                color: #c3c8bc
+            }
+
+            .tl-points {
+                columns: 2;
+                column-gap: 50px;
+                padding-left: 19px;
+                color: #c3c8bc;
+                font-size: .95rem;
+                line-height: 1.65
+            }
+
+            .tl-points li {
+                padding: 0 0 10px 7px;
+                break-inside: avoid
+            }
+
+            .tl-points li::marker {
+                color: var(--lime)
+            }
+
+            #contact {
+                background: var(--blue);
+                color: var(--lime);
+                text-align: center;
+                padding-bottom: 100px
+            }
+
+            .contact-big {
+                font-family: 'Barlow Condensed',Impact,sans-serif;
+                font-size: clamp(6rem,19vw,22rem);
+                letter-spacing: -.055em;
+                line-height: 1;
+                margin-bottom: 25px
+            }
+
+            .contact-big a {
+                display: inline-block;
+                transition: transform .4s;
+                color: var(--paper)
+            }
+
+            .contact-big a:hover {
+                transform: rotate(-6deg)
+            }
+
+            #contact>p {
+                color: var(--lime)!important
+            }
+
+            .contact-cards {
+                display: flex;
+                justify-content: center;
+                gap: 45px;
+                flex-wrap: wrap;
+                margin-top: 40px
+            }
+
+            .ccard {
+                display: flex;
+                gap: 12px;
+                text-align: left;
+                align-items: center
+            }
+
+            .ccard .ico {
+                font-size: 1.5rem
+            }
+
+            .ccard .k {
+                font-size: .75rem;
+                margin-bottom: 6px;
+                opacity: .8
+            }
+
+            .ccard .v {
+                font-size: .9rem
+            }
+
+            .ccard[href]:hover .v {
+                text-decoration: underline
+            }
+
+            footer {
+                background: var(--blue);
+                color: var(--lime);
+                border-top: 1px solid #e2ff5440;
+                padding: 30px 4% 80px;
+                display: flex;
+                gap: 25px;
+                justify-content: space-between;
+                align-items: center
+            }
+
+            footer>span,footer>a:last-child {
+                font-size: .75rem
+            }
+
+            .radar-launch {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                z-index: 25;
+                border: 1px solid #e2ff5460;
+                background: var(--ink);
+                color: var(--lime);
+                padding: 13px 20px;
+                border-radius: 99px;
+                font-size: .8rem;
+                box-shadow: 0 4px 25px #0002
+            }
+
+            .radar-launch i {
+                display: inline-block;
+                width: 7px;
+                height: 7px;
+                background: var(--lime);
+                border-radius: 50%;
+                margin-right: 8px
+            }
+
+            dialog {
+                background: var(--ink);
+                color: var(--paper);
+                border: 1px solid #e2ff5470;
+                border-radius: 22px;
+                padding: 30px;
+                width: min(420px,calc(100% - 30px));
+                max-height: 90svh;
+                overflow: auto;
+                text-align: center
+            }
+
+            dialog::backdrop {
+                background: #101410b0;
+                backdrop-filter: blur(9px)
+            }
+
+            dialog h2 {
+                font-size: 2rem;
+                margin-bottom: 5px
+            }
+
+            dialog canvas {
+                width: 100%;
+                max-width: 320px
+            }
+
+            dialog .as-close {
+                position: absolute;
+                right: 16px;
+                top: 10px;
+                border: 0;
+                background: none;
+                color: var(--lime);
+                font-size: 2rem
+            }
+
+            .as-sub {
+                font-size: .8rem;
+                color: var(--muted)
+            }
+
+            .motion .reveal {
+                opacity: 0;
+                transform: translateY(35px);
+                transition: opacity .8s,transform .9s cubic-bezier(.16,1,.3,1)
+            }
+
+            .motion .reveal.in {
+                opacity: 1;
+                transform: none
+            }
+
+            @keyframes arrive {
+                from {
+                    transform: translateY(50px) rotate(2deg);
+                    opacity: 0
+                }
+
+                to {
+                    transform: none;
+                    opacity: 1
+                }
+            }
+
+            @keyframes rotate {
+                to {
+                    transform: rotate(360deg)
+                }
+            }
+
+            @keyframes marquee {
+                to {
+                    transform: translateX(-50%)
+                }
+            }
+
+            @media(min-width: 1500px) {
+                #hero {
+                    max-height:1200px
+                }
+            }
+
+            @media(max-width: 900px) {
+                header {
+                    padding:22px 5%
+                }
+
+                nav {
+                    gap: 18px
+                }
+
+                .hero-bottom {
+                    gap: 4%;
+                    grid-template-columns: 1fr 1.3fr
+                }
+
+                .scroll-round {
+                    display: none
+                }
+
+                .about-grid {
+                    gap: 6%
+                }
+
+                .cert-grid {
+                    grid-template-columns: 1fr 1fr
+                }
+
+                .tl-head {
+                    display: block
+                }
+
+                .tl-date {
+                    margin-top: 12px
+                }
+
+                .cap-grid {
+                    gap: 0 25px
+                }
+
+                .hero-actions {
+                    gap: 17px
+                }
+
+                .hero-top {
+                    font-size: .65rem
+                }
+            }
+
+            @media(max-width: 650px) {
+                section {
+                    padding:75px 6%
+                }
+
+                header .brand {
+                    font-size: 2.6rem
+                }
+
+                .contact-link {
+                    padding: 10px 16px
+                }
+
+                .contact-link span {
+                    margin-left: 10px
+                }
+
+                #menu {
+                    display: block;
+                    background: none;
+                    color: var(--lime);
+                    border: 1px solid #e2ff5460;
+                    width: 42px;
+                    height: 42px;
+                    border-radius: 50%;
+                    font-size: 1.2rem
+                }
+
+                nav {
+                    display: none;
+                    position: absolute;
+                    top: 87px;
+                    left: 0;
+                    right: 0;
+                    background: var(--ink);
+                    padding: 25px 6%;
+                    flex-direction: column;
+                    gap: 12px;
+                    border-bottom: 1px solid var(--lime)
+                }
+
+                nav.open {
+                    display: flex
+                }
+
+                .hero-top {
+                    font-size: .65rem;
+                    line-height: 1.6;
+                    gap: 25px
+                }
+
+                .hero-top span {
+                    max-width: 48%
+                }
+
+                #hero {
+                    padding: 120px 5% 22px;
+                    min-height: calc(100svh - 20px)
+                }
+
+                h1 {
+                    font-size: 18.2vw;
+                    line-height: .86;
+                    margin-top: 18px;
+                    margin-bottom: 35px
+                }
+
+                h1 .surname {
+                    margin-top: 10px
+                }
+
+                .name-star {
+                    font-size: .72em
+                }
+
+                .hero-bottom {
+                    display: block
+                }
+
+                .hero-note {
+                    display: none
+                }
+
+                .hero-copy>p {
+                    font-size: 1rem;
+                    max-width: 360px;
+                    line-height: 1.55
+                }
+
+                .hero-actions {
+                    margin-top: 25px
+                }
+
+                .hero-foot {
+                    font-size: .6rem;
+                    line-height: 1.5;
+                    margin-top: 35px
+                }
+
+                .hero-foot>span:nth-child(2) {
+                    display: none
+                }
+
+                .ticker {
+                    padding: 18px 0
+                }
+
+                .about-grid {
+                    display: block
+                }
+
+                .stat-panel {
+                    display: grid;
+                    grid-template-columns: repeat(3,1fr);
+                    gap: 15px;
+                    margin-top: 40px
+                }
+
+                .stat .num {
+                    font-size: 3.4rem
+                }
+
+                .stat .lab {
+                    font-size: .75rem
+                }
+
+                .stat {
+                    padding: 15px 0
+                }
+
+                .sec-title {
+                    font-size: 3.7rem
+                }
+
+                .proj-grid,.cap-grid {
+                    grid-template-columns: 1fr
+                }
+
+                .proj {
+                    padding: 26px;
+                    min-height: 330px
+                }
+
+                .ptitle {
+                    font-size: 2rem
+                }
+
+                .cert-grid {
+                    gap: 18px
+                }
+
+                .cert h5 {
+                    font-size: 1rem
+                }
+
+                .tl-points {
+                    columns: 1
+                }
+
+                #projects {
+                    border-radius: 28px 28px 0 0
+                }
+
+                .contact-big {
+                    font-size: 24vw
+                }
+
+                .contact-cards {
+                    align-items: flex-start;
+                    flex-direction: column;
+                    gap: 25px;
+                    margin-left: 3%
+                }
+
+                .ccard .v {
+                    overflow-wrap: anywhere
+                }
+
+                footer {
+                    flex-wrap: wrap;
+                    padding-bottom: 90px
+                }
+
+                footer>span {
+                    order: 3;
+                    width: 100%
+                }
+
+                .radar-launch {
+                    font-size: .75rem;
+                    right: 12px;
+                    bottom: 12px
+                }
+
+                #about {
+                    padding-bottom: 80px
+                }
+            }
+
+            @media(prefers-reduced-motion:reduce) {
+                html {
+                    scroll-behavior: auto
+                }
+
+                *,*:before,*:after {
+                    animation: none!important;
+                    transition: none!important
+                }
+
+                .motion .reveal {
+                    opacity: 1;
+                    transform: none
+                }
+            }
+        </style>
+    <style>html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1!important;transform:none!important}.reference-mode-switch{position:fixed;bottom:18px;left:18px;z-index:100;border:1px solid #e2ff5470;border-radius:99px;padding:13px 18px;background:#1b1e19;color:#e2ff54;font:14px 'DM Sans',Arial,sans-serif;cursor:pointer}.reference-mode-switch:focus-visible{outline:3px solid #e2ff54;outline-offset:4px}@media(max-width:650px){.reference-mode-switch{left:10px;bottom:12px;padding:12px;font-size:12px}.radar-launch{max-width:47%;font-size:12px}}</style><link rel="stylesheet" href="flight-controls.css"></head>
+    <body>
+        <a class="skip" href="#about">Skip to content</a>
+        <div class="progress" aria-hidden="true"></div>
+        <header>
+            <a class="brand" href="#hero" aria-label="Emanuele De Rosa home">
+                edr<span>®</span>
+            </a>
+            <nav aria-label="Main navigation" id="navigation">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Expertise</a>
+                <a href="#projects">Projects</a>
+            </nav>
+            <div class="nav-end">
+                <a class="contact-link" href="#contact">
+                    Let’s talk <span>↗</span>
+                </a>
+                <button id="menu" aria-label="Open menu" aria-controls="navigation" aria-expanded="false">☰</button>
+            </div>
+        </header>
+        <main>
+            <section id="hero">
+                <div class="hero-top">
+                    <span>APPLICATION IT ANALYST & DEVELOPER</span>
+                    <span>NAPLES, ITALY ↗ ITALY & EU</span>
+                </div>
+                <h1>
+                    <span>EMANUELE</span>
+                    <span class="surname">
+                        DE ROSA<span class="name-star" aria-hidden="true">✳</span>
+                    </span>
+                </h1>
+                <div class="hero-bottom">
+                    <div class="hero-note">
+                        <span class="small-label">KEEPING THINGS MOVING.</span>
+                        <p>
+                            Reliable systems.<br>
+                            Practical solutions.<br>Real-world impact.
+                        </p>
+                    </div>
+                    <div class="hero-copy">
+                        <p>I support the technology behind 24/7 airport operations — from application troubleshooting to infrastructure and automation.</p>
+                        <div class="hero-actions">
+                            <a class="pill" href="#projects">
+                                Explore my work <span>↗</span>
+                            </a>
+                            <a class="cv" href="Emanuele_De_Rosa_CV.pdf" download>Download CV ↓</a>
+                        </div>
+                    </div>
+                    <a href="#about" class="scroll-round" aria-label="Scroll to about">↓</a>
+                </div>
+                <div class="hero-foot">
+                    <span>40.886° N &nbsp; 14.291° E</span>
+                    <span>SCROLL TO EXPLORE ↓</span>
+                    <span>PORTFOLIO / 2026</span>
+                </div>
+            </section>
+            <div class="ticker" aria-hidden="true">
+                <div>
+                    <span>APPLICATIONS</span>
+                    ✳ <span>INFRASTRUCTURE</span>
+                    ✳ <span>AUTOMATION</span>
+                    ✳ <span>APPLICATIONS</span>
+                    ✳ <span>INFRASTRUCTURE</span>
+                    ✳ <span>AUTOMATION</span>
+                    ✳ <span>APPLICATIONS</span>
+                    ✳ <span>INFRASTRUCTURE</span>
+                    ✳ <span>AUTOMATION</span>
+                    ✳ <span>APPLICATIONS</span>
+                    ✳ <span>INFRASTRUCTURE</span>
+                    ✳ <span>AUTOMATION</span>
+                    ✳ 
+                </div>
+            </div>
+            <section id="about">
+                <div class="about-grid">
+                    <div class="about-body">
+                        <span class="sec-tag reveal">Profile</span>
+                        <h2 class="sec-title reveal d1">
+                            Behind the<br>
+                            <span class="accent">systems.</span>
+                        </h2>
+                        <p class="reveal d2">
+                            I’m an <span class="hl">Application IT Specialist</span>
+                            with 3 years of experience supporting mission-critical <strong>airport environments</strong>
+                            across Italy and the EU. Naples is my home base, but I work across multiple airports, each with its own systems, standards, and operational requirements.
+                        </p>
+                        <p class="reveal d3">
+                            My main focus is <strong>Application Support and troubleshooting</strong>
+                            analysing logs, investigating bugs, working through database, run queries to identify issues and collaborating with development teams to identify and resolve problems. Alongside application support, I also work with <span class="hl">Active Directory</span>
+                            , Microsoft 365 and Exchange, PRTG monitoring, infrastructure support, and <strong>PowerShell automation</strong>
+                            to keep systems reliable and streamline repetitive tasks.
+                        </p>
+                        <p class="reveal d4">
+                            I enjoy <span class="hl">solving technical problems</span>
+                            , understanding how systems work behind the scenes, and finding practical solutions that make everyday operations simpler and more reliable.
+                        </p>
+                        <div class="chips reveal d5">
+                            <span class="chip">Born in 2002</span>
+                            <span class="chip">ITIL® 4 Foundation</span>
+                            <span class="chip">English C1</span>
+                            <span class="chip">Italy &amp; EU airports</span>
+                        </div>
+                    </div>
+                    <div class="stat-panel">
+                        <div class="stat reveal d1">
+                            <div class="num" data-count="3" data-suf="+">0</div>
+                            <div class="lab">Years in mission-critical airport IT</div>
+                        </div>
+                        <div class="stat reveal d2">
+                            <div class="num" data-count="10" data-suf="+">0</div>
+                            <div class="lab">Core systems operated</div>
+                        </div>
+                        <div class="stat reveal d3">
+                            <div class="num" data-count="24" data-suf="/7">0</div>
+                            <div class="lab">Airport ops coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="projects">
+                <span class="sec-tag reveal">My projects</span>
+                <h2 class="sec-title reveal d1">
+                    Less repetition.<br>
+                    <span class="accent">More possibility.</span>
+                </h2>
+                <div class="proj-grid">
+                    <article class="proj reveal d1">
+                        <div class="idx">01 / DEV</div>
+                        <h3 class="ptitle">Commercial Booking Platform</h3>
+                        <p class="pdesc">A booking platform I built and maintain for a barbershop, covering appointments, calendars, customers and staff schedules. I handle the development, database, deployment, updates and ongoing support.</p>
+                        <div class="ptags">
+                            <span>Full Stack</span>
+                            <span>Database</span>
+                            <span>UI/UX</span>
+                            <span>Maintenance</span>
+                        </div>
+                    </article>
+                    <article class="proj reveal d2">
+                        <div class="idx">02 / AUTOMATION</div>
+                        <h3 class="ptitle">AD Bulk-Provisioning Tool</h3>
+                        <p class="pdesc">A PowerShell tool that creates Active Directory users in bulk from an Excel file. I built it to make account creation faster and reduce the amount of manual work involved.</p>
+                        <div class="ptags">
+                            <span>PowerShell</span>
+                            <span>Active Directory</span>
+                            <span>Excel / VBA</span>
+                            <span>GUI</span>
+                        </div>
+                    </article>
+                    <article class="proj reveal d3">
+                        <div class="idx">03 / AUTOMATION</div>
+                        <h3 class="ptitle">Certificate-Secured SharePoint Sync</h3>
+                        <p class="pdesc">A PowerShell and Task Scheduler setup that synchronises files between a local server and SharePoint. The connection uses certificates for authentication and runs automatically in the background.</p>
+                        <div class="ptags">
+                            <span>PowerShell</span>
+                            <span>Task Scheduler</span>
+                            <span>SharePoint</span>
+                            <span>Certificates</span>
+                        </div>
+                    </article>
+                    <article class="proj reveal d1">
+                        <div class="idx">04 / MONITORING</div>
+                        <h3 class="ptitle">Monitoring-to-Ticketing Pipeline</h3>
+                        <p class="pdesc">PRTG monitoring connected to client ticketing systems and on-call alerts. When a monitored service or system has a problem, a ticket can be created automatically and the right people are notified.</p>
+                        <div class="ptags">
+                            <span>PRTG</span>
+                            <span>Custom Alarms</span>
+                            <span>JIRA / OTRS / Ivanti</span>
+                            <span>Automation</span>
+                        </div>
+                    </article>
+                    <article class="proj reveal d2">
+                        <div class="idx">05 / DATA</div>
+                        <h3 class="ptitle">Database Monitoring &amp; Troubleshooting</h3>
+                        <p class="pdesc">Custom SQL queries combined with PRTG to monitor database health and investigate problems. This includes checking memory, CPU, disk space and tablespaces when something goes wrong.</p>
+                        <div class="ptags">
+                            <span>SQL</span>
+                            <span>Oracle</span>
+                            <span>PRTG</span>
+                            <span>Tablespaces</span>
+                        </div>
+                    </article>
+                    <article class="proj reveal d3">
+                        <div class="idx">06 / BI</div>
+                        <h3 class="ptitle">Oracle BI Reporting</h3>
+                        <p class="pdesc">Oracle BI analyses and reports for accounting and operational teams, using system and business data to create reports that are easier to understand and use.</p>
+                        <div class="ptags">
+                            <span>Oracle BI</span>
+                            <span>Reporting</span>
+                            <span>Analytics</span>
+                        </div>
+                    </article>
+                </div>
+                <!-- CERTS -->
+                <span class="sec-tag reveal" style="margin-top:64px">Certificates</span>
+                <div class="cert-grid">
+                    <div class="cert reveal d1">
+                        <div class="cbadge">DEC 2025 · PEOPLECERT</div>
+                        <h5>ITIL® 4 Foundation</h5>
+                        <p>IT service management framework</p>
+                    </div>
+                    <div class="cert reveal d2">
+                        <div class="cbadge">NOV 2021 · BRITISH INSTITUTES</div>
+                        <h5>English C1</h5>
+                        <p>Proficient — professional working</p>
+                    </div>
+                    <div class="cert reveal d3">
+                        <div class="cbadge">NOV 2020 · EIPASS</div>
+                        <h5>EIPASS European Computer</h5>
+                        <p>Digital competency certification</p>
+                    </div>
+                    <div class="cert reveal d4">
+                        <div class="cbadge">DEC 2020 · ROBOCUP</div>
+                        <h5>Robotics Certification</h5>
+                        <p>RoboCup programme</p>
+                    </div>
+                </div>
+            </section>
+            <section id="skills">
+                <span class="sec-tag reveal">My skills</span>
+                <h2 class="sec-title reveal d1">
+                    A practical<br>
+                    <span class="accent">toolkit.</span>
+                </h2>
+                <p class="sys-intro reveal d1">
+                    I’m based in Naples and I support <span class="hl">multiple airports across Italy and the European Union</span>
+                    . Since every airport has its own systems and setup, my work covers a bit of everything, from infrastructure and Microsoft 365 to monitoring, automation, databases and application support.
+                </p>
+                <div class="cap-grid">
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="7" rx="1.5"/>
+                                    <rect x="3" y="13" width="18" height="7" rx="1.5"/>
+                                    <line x1="6.5" y1="7.5" x2="6.5" y2="7.5"/>
+                                    <line x1="6.5" y1="16.5" x2="6.5" y2="16.5"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Infrastructure &amp; Directory</span>
+                        </div>
+                        <p>Manage Active Directory, DHCP and Group Policy across client environments, working with Windows and Linux servers as well as network equipment and Raspberry Pi devices.</p>
+                        <div class="cap-tags">
+                            <span>Active Directory</span>
+                            <span>DHCP</span>
+                            <span>Group Policy</span>
+                            <span>Windows Server</span>
+                            <span>Linux</span>
+                            <span>Switches</span>
+                            <span>Raspberry Pi</span>
+                        </div>
+                    </article>
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                                    <path d="M4 7l8 6 8-6"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Microsoft 365 &amp; Exchange</span>
+                        </div>
+                        <p>Manage Microsoft 365 and Exchange, including transport rules, shared mailboxes, distribution lists, permissions, licenses and identity sync errors with Active Directory.</p>
+                        <div class="cap-tags">
+                            <span>Microsoft 365</span>
+                            <span>Exchange</span>
+                            <span>Transport Rules</span>
+                            <span>Licensing</span>
+                            <span>Shared Mailboxes</span>
+                            <span>Distribution Lists</span>
+                            <span>AD Sync</span>
+                        </div>
+                    </article>
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <path d="M7 12h2l2-4 2 8 2-4h2"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Monitoring &amp; Alerting</span>
+                        </div>
+                        <p>Set up and maintain PRTG sensors, monitoring and custom alerts, with notifications and automatic ticket creation when issues are detected.</p>
+                        <div class="cap-tags">
+                            <span>PRTG</span>
+                            <span>Custom Alarms</span>
+                            <span>Notifications</span>
+                            <span>On-call Escalation</span>
+                        </div>
+                    </article>
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <ellipse cx="12" cy="6" rx="7" ry="3"/>
+                                    <path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/>
+                                    <path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Databases &amp; Troubleshooting</span>
+                        </div>
+                        <p>Check database health, monitor memory, CPU, storage and tablespaces, and use SQL queries together with PRTG to investigate issues in real time.</p>
+                        <div class="cap-tags">
+                            <span>SQL</span>
+                            <span>Oracle</span>
+                            <span>Tablespaces</span>
+                            <span>PRTG Integration</span>
+                            <span>Health Checks</span>
+                        </div>
+                    </article>
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                    <path d="M7 9l3 3-3 3"/>
+                                    <line x1="13" y1="15" x2="17" y2="15"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Automation &amp; Scripting</span>
+                        </div>
+                        <p>Build PowerShell scripts to automate repetitive tasks, including bulk AD provisioning from Excel, file synchronisation through Task Scheduler and API integrations between systems.</p>
+                        <div class="cap-tags">
+                            <span>PowerShell</span>
+                            <span>Task Scheduler</span>
+                            <span>SharePoint</span>
+                            <span>Certificates</span>
+                            <span>Excel / VBA</span>
+                            <span>REST APIs</span>
+                        </div>
+                    </article>
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 8l-4 4 4 4"/>
+                                    <path d="M15 8l4 4-4 4"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Application Support &amp; Release</span>
+                        </div>
+                        <p>Analyse application logs and errors, work with developers to troubleshoot issues, and test Java, Tomcat and Servlet releases and bug fixes before they go to production.</p>
+                        <div class="cap-tags">
+                            <span>Log Analysis</span>
+                            <span>Java</span>
+                            <span>Tomcat</span>
+                            <span>Servlets</span>
+                            <span>Release QA</span>
+                            <span>Oracle BI</span>
+                        </div>
+                    </article>
+                    <article class="cap reveal">
+                        <div class="cap-h">
+                            <span class="cap-ico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                            </span>
+                            <span class="cap-t">Cybersecurity &amp; Service Desk</span>
+                        </div>
+                        <p>Handle phishing and security alerts using Darktrace and Exchange message tracing, and manage incidents through different client ticketing systems.</p>
+                        <div class="cap-tags">
+                            <span>Darktrace</span>
+                            <span>Phishing Triage</span>
+                            <span>Exchange Trace</span>
+                            <span>JIRA</span>
+                            <span>OTRS</span>
+                            <span>Ivanti</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section id="experience">
+                <span class="sec-tag reveal"> Log</span>
+                <h2 class="sec-title reveal d1">
+                    The flight<br>
+                    <span class="accent">log.</span>
+                </h2>
+                <div class="timeline" id="timeline">
+                    <div class="tl-item reveal">
+                        <div class="tl-node"></div>
+                        <div class="tl-card tilt">
+                            <div class="tl-head">
+                                <div class="tl-role">Application IT Analyst</div>
+                                <div class="tl-date">AUG 2024 — PRESENT · ~2 YRS</div>
+                            </div>
+                            <div class="tl-org">Naples Airport · Airport clients — Italy &amp; EU</div>
+                            <p class="tl-desc">
+                                I provide second and third line IT support for several airport clients. Naples is my home base, but I work with <strong>multiple airports across Italy and the European Union</strong>
+                                , each with different systems and ways of working.
+                            </p>
+                            <ul class="tl-points">
+                                <li>Test new Java, Tomcat and Servlet releases and bug fixes in Sandbox and Production environments, handle full application builds and deployments</li>
+                                <li>Check database health, troubleshoot SQL and PRTG issues, and analyse application logs and errors together with developers</li>
+                                <li>Create Oracle BI reports for accounting and operations</li>
+                                <li>Set up and maintain PRTG monitoring and alerts, with automatic ticket creation and on call notifications through JIRA, OTRS and Ivanti</li>
+                                <li>Manage Active Directory, DHCP and Group Policy, as well as Microsoft 365 and Exchange, including transport rules, licenses, shared mailboxes, distribution lists and identity sync</li>
+                                <li>Use PowerShell to automate repetitive tasks such as bulk AD account creation, Excel based provisioning and SharePoint sync, and work with API integrations</li>
+                                <li>Handle cybersecurity and phishing alerts using Darktrace and Exchange message tracing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tl-item reveal">
+                        <div class="tl-node"></div>
+                        <div class="tl-card tilt">
+                            <div class="tl-head">
+                                <div class="tl-role">Freelance Software Developer</div>
+                                <div class="tl-date">2025 · SIDE PROJECT</div>
+                            </div>
+                            <div class="tl-org">Self-Employed</div>
+                            <p class="tl-desc">I built a booking platform for a Barbershop, handling the project from the initial idea through development, deployment and ongoing support.</p>
+                            <ul class="tl-points">
+                                <li>Built the booking system for appointments, calendars, customers and staff schedules</li>
+                                <li>Deployment on Google Play Store</li>
+                                <li>Designed and created the database and user interface around the day to day needs of the business</li>
+                                <li>Handle updates, maintenance, deployment and client support myself</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tl-item reveal">
+                        <div class="tl-node"></div>
+                        <div class="tl-card tilt">
+                            <div class="tl-head">
+                                <div class="tl-role">Help Desk · Level 1 Support</div>
+                                <div class="tl-date">AUG 2023 · AUG 2024 · ~1 YR</div>
+                            </div>
+                            <div class="tl-org">Naples Airport · Software Design srl</div>
+                            <p class="tl-desc">Started in airport IT as a first point of contact for users, dealing with day to day issues across airport and office systems and learning how to troubleshoot problems under pressure.</p>
+                            <ul class="tl-points">
+                                <li>Supported workstations, applications and network connections</li>
+                                <li>Managed incidents and service requests through the ticketing system and followed SLA requirements</li>
+                                <li>Handled user access, account requests and peripheral issues</li>
+                                <li>Escalated more complex issues to second level and infrastructure teams with the relevant information and troubleshooting steps</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="contact">
+                <div class="contact-big reveal d1">
+                    Let's <a href="mailto:emanuelederosa95@gmail.com">talk.</a>
+                </div>
+                <p class="reveal d2" style="color:var(--muted);max-width:520px;margin:0 auto">Open to new opportunities in IT and software, and happy to explore different roles, industries and locations. I’m open to opportunities anywhere.</p>
+                <div class="contact-cards reveal d3">
+                    <a class="ccard" href="mailto:emanuelederosa95@gmail.com?subject=Let%27s%20connect&body=Hi%20Emanuele%2C%0A%0A" data-magnetic>
+                        <div class="ico">✉</div>
+                        <div>
+                            <div class="k">Email</div>
+                            <div class="v">emanuelederosa95@gmail.com</div>
+                        </div>
+                    </a>
+                    <a class="ccard" href="https://www.linkedin.com/in/emanuele-de-rosa-386075a4" target="_blank" rel="noopener" data-magnetic>
+                        <div class="ico">in</div>
+                        <div>
+                            <div class="k">LinkedIn</div>
+                            <div class="v">View profile ↗</div>
+                        </div>
+                    </a>
+                    <div class="ccard" data-magnetic>
+                        <div class="ico">◈</div>
+                        <div>
+                            <div class="k">Base</div>
+                            <div class="v">Naples, Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <a class="brand" href="#hero">
+                edr<span>®</span>
+            </a>
+            <span>EMANUELE DE ROSA · NAPLES, ITALY</span>
+            <a href="#hero">Back to top ↑</a>
+        </footer>
+        <button class="radar-launch" id="radarFab">
+            <i></i>
+            Naples airspace ↗
+        </button>
+        <dialog id="airspace" aria-labelledby="radar-title">
+            <button class="as-close" id="asClose" aria-label="Close radar">×</button>
+            <span class="small-label">LIVE ADS-B</span>
+            <h2 id="radar-title">Above Naples.</h2>
+            <canvas id="asCanvas" width="320" height="320" aria-label="Aircraft positions around Naples"></canvas>
+            <p id="asMsg" role="status">Ready to scan.</p>
+            <p class="as-sub" id="asSub">airplanes.live</p>
+            <button id="rescan" class="pill">Scan again ↗</button>
+        </dialog>
+        <script>
+            const reduced = true;
+            const $ = s => document.querySelector(s);
+            const menu = $('#menu')
+              , nav = $('#navigation');
+            function closeMenu() {
+                nav.classList.remove('open');
+                menu.setAttribute('aria-expanded', 'false');
+                menu.setAttribute('aria-label', 'Open menu');
+            }
+            menu.addEventListener('click', () => {
+                const open = nav.classList.toggle('open');
+                menu.setAttribute('aria-expanded', String(open));
+                menu.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            }
+            );
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    closeMenu();
+                }
+            }
+            );
+            if ('IntersectionObserver' in window) {
+                
+                const observer = new IntersectionObserver(entries => entries.forEach( ({target, isIntersecting}) => {
+                    if (isIntersecting) {
+                        target.classList.add('in');
+                        observer.unobserve(target);
+                    }
+                }
+                ),{
+                    threshold: .08
+                });
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            }
+            document.querySelectorAll('[data-count]').forEach(el => {
+                const end = Number(el.dataset.count)
+                  , suffix = el.dataset.suf || '';
+                el.textContent = end + suffix;
+                if (reduced || !('IntersectionObserver' in window))
+                    return;
+                const io = new IntersectionObserver(es => {
+                    if (!es[0].isIntersecting)
+                        return;
+                    io.disconnect();
+                    const start = performance.now();
+                    function tick(now) {
+                        const t = Math.min((now - start) / 1200, 1);
+                        el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3))) + suffix;
+                        if (t < 1)
+                            requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                }
+                );
+                io.observe(el);
+            }
+            );
+            let scrollQueued = false;
+            function updateScroll() {
+                scrollQueued = false;
+                const range = document.documentElement.scrollHeight - innerHeight;
+                $('.progress').style.width = (range > 0 ? scrollY / range * 100 : 0) + '%';
+                if (!reduced && innerWidth > 650) {
+                    const y = Math.min(scrollY, innerHeight);
+                    $('h1').style.transform = `translateY(${y * .12}px)`;
+                }
+            }
+            addEventListener('scroll', () => {
+                if (!scrollQueued) {
+                    scrollQueued = true;
+                    requestAnimationFrame(updateScroll);
+                }
+            }
+            , {
+                passive: true
+            });
+            updateScroll();
+            const dialog = $('#airspace')
+              , canvas = $('#asCanvas')
+              , ctx = canvas.getContext('2d');
+            let radarFrame = 0
+              , angle = 0
+              , aircraft = []
+              , controller = null
+              , scanId = 0;
+            function drawRadar() {
+                ctx.clearRect(0, 0, 320, 320);
+                ctx.strokeStyle = '#e2ff5435';
+                ctx.lineWidth = 1;
+                for (let i = 1; i <= 4; i++) {
+                    ctx.beginPath();
+                    ctx.arc(160, 160, 35 * i, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                ctx.beginPath();
+                ctx.moveTo(20, 160);
+                ctx.lineTo(300, 160);
+                ctx.moveTo(160, 20);
+                ctx.lineTo(160, 300);
+                ctx.stroke();
+                if (!reduced) {
+                    angle += .015;
+                    ctx.fillStyle = '#e2ff5422';
+                    ctx.beginPath();
+                    ctx.moveTo(160, 160);
+                    ctx.arc(160, 160, 140, angle - .6, angle);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.fillStyle = '#e2ff54';
+                for (const a of aircraft) {
+                    ctx.beginPath();
+                    ctx.arc(a.x, a.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(157, 157, 6, 6);
+                if (dialog.open && !reduced)
+                    radarFrame = requestAnimationFrame(drawRadar);
+            }
+            async function scan() {
+                const id = ++scanId;
+                controller?.abort();
+                controller = new AbortController();
+                aircraft = [];
+                $('#asMsg').textContent = 'Scanning Naples airspace…';
+                $('#asSub').textContent = 'Live ADS-B · airplanes.live';
+                $('#rescan').disabled = true;
+                let ok = false;
+                const feeds = ['https://api.airplanes.live/v2/point/40.886/14.291/90', 'https://opendata.adsb.fi/api/v2/lat/40.886/lon/14.291/dist/90', 'https://api.adsb.lol/v2/lat/40.886/lon/14.291/dist/90'];
+                for (const feed of feeds) {
+                    if (id !== scanId || !dialog.open)
+                        break;
+                    const attempt = new AbortController();
+                    const abort = () => attempt.abort();
+                    controller.signal.addEventListener('abort', abort, {
+                        once: true
+                    });
+                    const timer = setTimeout(abort, 6500);
+                    try {
+                        const response = await fetch(feed, {
+                            signal: attempt.signal
+                        });
+                        if (!response.ok)
+                            throw Error('Feed unavailable');
+                        const data = await response.json();
+                        if (!Array.isArray(data.ac))
+                            throw Error('Invalid feed');
+                        if (id !== scanId || !dialog.open)
+                            return;
+                        aircraft = data.ac.filter(a => Number.isFinite(a.lat) && Number.isFinite(a.lon) && a.alt_baro !== 'ground' && Math.abs(a.lat - 40.886) < .7 && Math.abs(a.lon - 14.291) < .85).map(a => ({
+                            x: 160 + (a.lon - 14.291) / .85 * 130,
+                            y: 160 + (40.886 - a.lat) / .7 * 130
+                        }));
+                        $('#asMsg').textContent = aircraft.length ? `${aircraft.length} aircraft in range` : 'No aircraft in range';
+                        $('#asSub').textContent = `${new URL(feed).hostname} · Updated ${new Date().toLocaleTimeString()}`;
+                        ok = true;
+                        if (reduced)
+                            drawRadar();
+                        break;
+                    } catch {} finally {
+                        clearTimeout(timer);
+                        controller.signal.removeEventListener('abort', abort);
+                    }
+                }
+                if (id !== scanId || !dialog.open)
+                    return;
+                if (!ok) {
+                    $('#asMsg').textContent = 'Live feed unavailable';
+                    $('#asSub').textContent = 'The aircraft data service could not be reached. Try again shortly.';
+                }
+                $('#rescan').disabled = false;
+            }
+            $('#radarFab').addEventListener('click', () => {
+                dialog.showModal();
+                cancelAnimationFrame(radarFrame);
+                drawRadar();
+                scan();
+            }
+            );
+            $('#asClose').addEventListener('click', () => dialog.close());
+            $('#rescan').addEventListener('click', scan);
+            dialog.addEventListener('click', e => {
+                if (e.target === dialog) {
+                    const r = dialog.getBoundingClientRect();
+                    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)
+                        dialog.close();
+                }
+            }
+            );
+            dialog.addEventListener('close', () => {
+                scanId++;
+                controller?.abort();
+                cancelAnimationFrame(radarFrame);
+                $('#radarFab').focus();
+            }
+            );
+        </script>
+    <button class="reference-mode-switch" id="referenceMode" aria-label="Turn motion on" aria-pressed="false">Motion off · Turn on ↗</button><script>window.__setPortfolioMode=function(mode){
+ try{localStorage.setItem('edr-motion-mode',mode);}catch{}
+ const flight=document.getElementById('flightJourney');let anchor='hero';
+ for(const section of document.querySelectorAll('main section[id]'))if(section.getBoundingClientRect().top<innerHeight*.4)anchor=section.id;
+ if(flight){const r=flight.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)anchor='about';}
+ location.assign((mode==='off'?'static-mode.html':'./?motion=on')+'#'+anchor);
+};
+document.getElementById('referenceMode').addEventListener('click',()=>window.__setPortfolioMode('on'));</script></body>
+</html>
