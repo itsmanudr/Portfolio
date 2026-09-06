@@ -2,8 +2,8 @@ import * as T from './vendor/three.module.js';
 // Original procedural airframe. Longitudinal X, vertical Y, span Z.
 export function createAircraft(){
  const root=new T.Group(),hull=new T.Group(),left=new T.Group(),right=new T.Group(),internals=new T.Group();root.add(hull,left,right,internals);
- const shell=new T.MeshPhysicalMaterial({color:0xf1f4f7,metalness:.22,roughness:.23,clearcoat:1,clearcoatRoughness:.16});
- const blue=new T.MeshStandardMaterial({color:0x183adc,metalness:.52,roughness:.3,side:T.DoubleSide});
+ const shell=new T.MeshPhysicalMaterial({color:0xf7f8fb,metalness:.06,roughness:.20,clearcoat:1,clearcoatRoughness:.10});
+ const blue=new T.MeshPhysicalMaterial({color:0x2445f5,metalness:.10,roughness:.18,clearcoat:1,clearcoatRoughness:.10,side:T.DoubleSide});
  const lime=new T.MeshStandardMaterial({color:0xe2ff54,emissive:0x8cae14,emissiveIntensity:.22,metalness:.2,roughness:.32,side:T.DoubleSide});
  const metal=new T.MeshStandardMaterial({color:0x738496,metalness:.85,roughness:.3,side:T.DoubleSide});
  const black=new T.MeshStandardMaterial({color:0x07131e,metalness:.5,roughness:.25});
@@ -32,19 +32,19 @@ export function createAircraft(){
   const wing=side<0?left:right;
   foil([[1,.32*side],[.15,2.3*side],[-1.55,4.6*side],[-2.02,4.6*side],[-1.35,1.35*side],[-1.1,.32*side]],wing,shell,-.13,.055);
   foil([[.85,.42*side],[.06,2.25*side],[-1.64,4.51*side],[-1.85,4.51*side],[-.28,2.16*side],[.52,.42*side]],wing,metal,-.066,.008);
-  const winglet=foil([[-1.56,4.55*side],[-2.04,4.55*side],[-2.17,4.94*side],[-1.94,4.94*side]],wing,lime,-.06,.022);winglet.geometry.translate(0,0,-4.55*side);winglet.geometry.rotateX(-side*.9);winglet.geometry.translate(0,0,4.55*side);
+  const winglet=foil([[-1.56,4.55*side],[-2.04,4.55*side],[-2.17,4.94*side],[-1.94,4.94*side]],wing,blue,-.06,.022);winglet.geometry.translate(0,0,-4.55*side);winglet.geometry.rotateX(-side*.9);winglet.geometry.translate(0,0,4.55*side);
   foil([[-3.02,.15*side],[-3.73,1.85*side],[-4.31,1.85*side],[-4.02,.18*side]],hull,blue,.13,.04);
   const engine=new T.Group();engine.position.set(.13,-.62,1.62*side);wing.add(engine);
   // Open nacelle with a recessed fan, rim, core and rear nozzle.
   const nacelleProfile=[new T.Vector2(.30,.72),new T.Vector2(.35,.63),new T.Vector2(.38,.40),new T.Vector2(.35,-.33),new T.Vector2(.23,-.73),new T.Vector2(.17,-.76),new T.Vector2(.18,-.65),new T.Vector2(.26,.37),new T.Vector2(.27,.65),new T.Vector2(.30,.72)];
-  const ng=new T.LatheGeometry(nacelleProfile,72);ng.rotateZ(-Math.PI/2);mesh(ng,shell,engine);
+  const ng=new T.LatheGeometry(nacelleProfile,72);ng.rotateZ(-Math.PI/2);mesh(ng,blue,engine);
   const rim=mesh(new T.TorusGeometry(.301,.035,16,72),metal,engine,.69);rim.rotation.y=Math.PI/2;
   const dark=mesh(new T.CircleGeometry(.273,32),black,engine,.44);dark.rotation.y=Math.PI/2;
   const fan=new T.Group();fan.position.x=.49;engine.add(fan);fans.push(fan);
   const core=mesh(new T.ConeGeometry(.085,.19,16),metal,fan,.05);core.rotation.z=-Math.PI/2;
   for(let k=0;k<24;k++){const b=mesh(new T.BoxGeometry(.025,.17,.027),metal,fan,0,Math.cos(k*Math.PI/12)*.17,Math.sin(k*Math.PI/12)*.17);b.rotation.x=k*Math.PI/12;b.rotation.y=.35;}
   mesh(new T.BoxGeometry(.55,.32,.13),metal,wing,-.05,-.32,1.62*side);
-  for(let i=0;i<28;i++){const win=mesh(new T.SphereGeometry(1,16,12),black,hull,-2.72+i*.20,.17,.408*side);win.scale.set(.052,.066,.013);}
+  for(let i=0;i<28;i++){const win=mesh(new T.SphereGeometry(1,16,12),black,hull,-2.72+i*.20,.17,.408*side);win.scale.set(.058,.073,.014);}
   for(const x of [-2.8,2.6]){const door=mesh(new T.BoxGeometry(.17,.36,.014),metal,hull,x,-.03,.428*side);const inset=mesh(new T.BoxGeometry(.14,.32,.016),shell,hull,x,-.03,.439*side);}
   const nav=mesh(new T.SphereGeometry(.043,10,8),new T.MeshBasicMaterial({color:side<0?0xff534c:0x7eff95}),wing,-1.89,.18,4.60*side);lights.push(nav);
  }
@@ -56,6 +56,32 @@ export function createAircraft(){
  const stations=[];
  for(let i=0;i<7;i++){const n=mesh(new T.IcosahedronGeometry(.1,1),glow,internals,-2.5+i*.8,0,0);stations.push(n);const ring=mesh(new T.TorusGeometry(.23,.008,6,30),glow,internals,n.position.x);ring.rotation.y=Math.PI/2;}
  const lineGeo=new T.BufferGeometry().setFromPoints([new T.Vector3(-2.5,0,0),new T.Vector3(2.3,0,0)]);internals.add(new T.Line(lineGeo,new T.LineBasicMaterial({color:0xe2ff54})));internals.visible=false;
- root.userData={shell,wireMaterial,left,right,fans,gears,internals,stations,lights};
+
+ // Portfolio livery: a crisp, playful decal that stays attached to the real 3D model.
+ function canvasTexture(draw,w=1024,h=256){
+  const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);
+  const tex=new T.CanvasTexture(c);tex.colorSpace=T.SRGBColorSpace;tex.minFilter=T.LinearFilter;tex.magFilter=T.LinearFilter;tex.generateMipmaps=true;return tex;
+ }
+ const hireTexture=canvasTexture((x,w,h)=>{
+  x.clearRect(0,0,w,h);x.textAlign='center';x.textBaseline='middle';x.font='900 150px Arial, sans-serif';x.fillStyle='#2445f5';
+  x.fillText('HIRE ME PLS!',w*.5,h*.51);
+  x.strokeStyle='#e2ff54';x.lineWidth=16;x.lineCap='round';
+  for(const [x1,y1,x2,y2] of [[55,70,15,40],[58,126,8,126],[57,182,17,214],[969,70,1009,40],[966,126,1016,126],[967,182,1007,214]]){x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
+ });
+ const decalMat=new T.MeshBasicMaterial({map:hireTexture,transparent:true,alphaTest:.04,depthWrite:false,toneMapped:false,side:T.DoubleSide});
+ const decals=[];
+ for(const side of [-1,1]){
+  const d=mesh(new T.PlaneGeometry(2.95,.55),decalMat,hull,.35,.25,.285*side);d.rotation.y=side<0?Math.PI:0;d.renderOrder=4;decals.push(d);
+ }
+ const smileTexture=canvasTexture((x,w,h)=>{
+  x.clearRect(0,0,w,h);x.strokeStyle='#e2ff54';x.fillStyle='#e2ff54';x.lineWidth=30;x.lineCap='round';
+  x.beginPath();x.arc(w/2,h/2,86,0,Math.PI*2);x.stroke();
+  x.beginPath();x.arc(w*.42,h*.43,10,0,Math.PI*2);x.arc(w*.58,h*.43,10,0,Math.PI*2);x.fill();
+  x.beginPath();x.arc(w/2,h*.52,48,.18*Math.PI,.82*Math.PI);x.stroke();
+ },256,256);
+ const smileMat=new T.MeshBasicMaterial({map:smileTexture,transparent:true,alphaTest:.04,depthWrite:false,toneMapped:false,side:T.DoubleSide});
+ for(const side of [-1,1]){const s=mesh(new T.PlaneGeometry(.72,.72),smileMat,hull,-3.72,1.08,.048*side);s.rotation.y=side<0?Math.PI:0;s.renderOrder=4;decals.push(s);}
+
+ root.userData={shell,wireMaterial,left,right,fans,gears,internals,stations,lights,decals};
  return root;
 }
