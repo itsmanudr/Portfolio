@@ -331,4 +331,4 @@ if(typeof document!=='undefined')(()=>{
  document.addEventListener('flightframe',e=>{last=e.detail;draw(last);});document.addEventListener('motionchange',e=>{paused=e.detail.paused;ctx.clearRect(0,0,w,h);if(paused){cards.forEach(el=>el.style.transform='');contact.style.transform='';}else{if(last)draw(last);page();}});
  addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(page);}},{passive:true});addEventListener('resize',resize);resize();page();
 })();
-</script><script type="module" src="flight-3d.mjs"></script><div class="scroll-flight" aria-hidden="true"><div class="scroll-flight-marker"><span>✈&#xfe0e;</span></div></div><script src="scroll-flight.js"></script></body></html>
+</script><script type="module" src="flight-3d.mjs?v=hire-me-toy-1"></script><div class="scroll-flight" aria-hidden="true"><div class="scroll-flight-marker"><span>✈&#xfe0e;</span></div></div><script src="scroll-flight.js"></script></body></html>
